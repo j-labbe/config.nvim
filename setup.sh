@@ -8,7 +8,7 @@ command -v git >/dev/null 2>&1 || { echo "Error: git is required"; exit 1; }
 command -v nvim >/dev/null 2>&1 || { echo "Error: neovim 0.11+ is required"; exit 1; }
 
 # Check Neovim version
-NVIM_VERSION=$(nvim --version | head -1 | grep -oP 'v\K[0-9]+\.[0-9]+')
+NVIM_VERSION=$(nvim --version | head -1 | sed 's/.*v\([0-9]*\.[0-9]*\).*/\1/')
 if [ "$(echo "$NVIM_VERSION < 0.11" | bc)" -eq 1 ]; then
     echo "Error: Neovim 0.11+ required (found $NVIM_VERSION)"
     exit 1
