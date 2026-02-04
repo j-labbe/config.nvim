@@ -33,8 +33,38 @@ npm install -g bash-language-server
 if command -v rustup &> /dev/null; then
     echo "Installing rust-analyzer..."
     rustup component add rust-analyzer
+    rustup component add rustfmt
 else
-    echo "Skipping rust-analyzer (rustup not found)"
+    echo "Skipping rust-analyzer and rustfmt (rustup not found)"
+fi
+
+echo "Installing formatters (conform.nvim)..."
+
+# JS/TS/HTML/CSS/JSON/YAML/Markdown formatters
+npm install -g prettier @fsouza/prettierd
+
+# Lua formatter
+if command -v cargo &> /dev/null; then
+    echo "Installing stylua..."
+    cargo install stylua
+else
+    echo "Skipping stylua (cargo not found)"
+fi
+
+# Python formatter
+if command -v pip &> /dev/null; then
+    echo "Installing ruff..."
+    pip install ruff --user
+else
+    echo "Skipping ruff (pip not found)"
+fi
+
+# Shell formatter
+if ! command -v shfmt &> /dev/null; then
+    echo "Installing shfmt..."
+    curl -sS https://webi.sh/shfmt | sh
+else
+    echo "shfmt already installed"
 fi
 
 echo ""
