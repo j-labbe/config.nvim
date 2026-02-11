@@ -11,3 +11,4 @@ vim.o.statuscolumn = "%s %l %r"
 
 require("config.lazy")
 require("config.foldtext")
+require("config.keymaps")
